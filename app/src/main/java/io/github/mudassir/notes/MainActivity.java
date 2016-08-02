@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 		return count;
 	}
 
-	private final AsyncTask<Void, Void, Void> fetchAsyncTask = new AsyncTask<Void, Void, Void>() {
+	private class FetchAsyncTask extends AsyncTask<Void, Void, Void> {
 		private static final String TAG = "FetchAsyncTask";
 
 		@Override
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	};
 
-	private final AsyncTask<Void, Void, Void> sendAsyncTask = new AsyncTask<Void, Void, Void>() {
+	private class SendAsyncTask extends AsyncTask<Void, Void, Void> {
 		private static final String TAG = "SendAsyncTask";
 
 		@Override
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	};
 
-	private final AsyncTask<Void, Void, Void> draftAsyncTask = new AsyncTask<Void, Void, Void>() {
+	private class DraftAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(final Void... voids) {
 			return null;
@@ -160,21 +160,21 @@ public class MainActivity extends AppCompatActivity {
 		findViewById(R.id.fetch).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View view) {
-				fetchAsyncTask.execute();
+				new FetchAsyncTask().execute();
 			}
 		});
 
 		findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View view) {
-				sendAsyncTask.execute();
+				new SendAsyncTask().execute();
 			}
 		});
 
 		findViewById(R.id.draft).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View view) {
-				draftAsyncTask.execute();
+				new DraftAsyncTask().execute();
 			}
 		});
     }
