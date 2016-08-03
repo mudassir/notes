@@ -10,9 +10,9 @@ import android.view.View;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 import javax.mail.Authenticator;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -148,6 +148,44 @@ public class MainActivity extends AppCompatActivity {
 	private class DraftAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(final Void... voids) {
+			try {
+				String incomingHost = getString(R.string.incoming_host);
+				String incomingPort = getString(R.string.incoming_port);
+				String user = getString(R.string.user);
+				String password = getString(R.string.password);
+
+				Properties properties = new Properties();
+				properties.put("mail.imaps.host", incomingHost);
+				properties.put("mail.imaps.port", incomingPort);
+				properties.put("mail.imaps.starttls.enable", "true");
+
+				// Create the POP3 store object and connect with the pop server
+				Session emailSession = Session.getInstance(properties);
+				Store store = emailSession.getStore("imaps");
+				store.connect(incomingHost, user, password);
+				Log.d(TAG, "connected to server");
+
+				Folder emailFolder = store.getFolder("Notes");
+				emailFolder.open(Folder.READ_WRITE);
+
+				Message message = new MimeMessage(emailSession);
+				message.setFrom(new InternetAddress(user));
+				message.setSubject("Testing Subject " + getCount(getApplicationContext()));
+				message.setText("this is some text");
+				message.setHeader("X-Uniform-Type-Identifier", "com.apple.mail-note");
+				message.setFlag(Flags.Flag.DRAFT, true);
+
+				emailFolder.appendMessages(new Message[] {message});
+				Log.d(TAG, "draft saved");
+
+				emailFolder.close(false);
+				store.close();
+			} catch (NoSuchProviderException e) {
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+
 			return null;
 		}
 	};
