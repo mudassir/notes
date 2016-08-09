@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 			return null;
 		}
-	};
+	}
 
 	private class SendAsyncTask extends AsyncTask<Void, Void, Void> {
 		private static final String TAG = "SendAsyncTask";
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
 			return null;
 		}
-	};
+	}
 
 	private class DraftAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Override
@@ -171,8 +174,9 @@ public class MainActivity extends AppCompatActivity {
 				Message message = new MimeMessage(emailSession);
 				message.setFrom(new InternetAddress(user));
 				message.setSubject("Testing Subject " + getCount(getApplicationContext()));
-				message.setText("this is some text");
+				message.setContent("<h1>here is some html</h1>", "text/html; charset=us-ascii");
 				message.setHeader("X-Uniform-Type-Identifier", "com.apple.mail-note");
+				message.setHeader("Date", new SimpleDateFormat("EEE, MMM dd yyyy HH:mm:ss Z", Locale.US).format(new Date(System.currentTimeMillis())));
 				message.setFlag(Flags.Flag.DRAFT, true);
 
 				emailFolder.appendMessages(new Message[] {message});
@@ -188,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
 			return null;
 		}
-	};
+	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
