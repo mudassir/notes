@@ -1,10 +1,12 @@
 package io.github.mudassir.notes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 					Log.d(TAG, "---------------------------------");
 					Log.d(TAG, "Email Number " + (i + 1));
 					Log.d(TAG, "Subject: " + message.getSubject());
-					Log.d(TAG, "Text: " + message.getContent());
+					Log.d(TAG, "Text: " + Html.fromHtml(message.getContent().toString()));
 				}
 
 				emailFolder.close(false);
@@ -217,6 +219,13 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(final View view) {
 				new DraftAsyncTask().execute();
+			}
+		});
+
+		findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View view) {
+				startActivity(new Intent(MainActivity.this, ListActivity.class));
 			}
 		});
     }
