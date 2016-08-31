@@ -21,7 +21,7 @@ import javax.mail.Store;
  */
 public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> {
 
-	public static final String PACKAGE = "io.github.mudassir";
+	public static final String PACKAGE = "io.github.mudassir.notes";
 	public static final String TAG = "NoteRequestHandler";
 
 	public static final String PROPERTY_HOST = PACKAGE + ".host";
@@ -63,7 +63,7 @@ public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> 
 			for (Message message : messages) {
 				Note note = new Note.Builder()
 						.title(message.getSubject())
-						.body(Html.fromHtml(message.getContent().toString()))
+						.body(message.getContent().toString())
 						.build();
 				notes.add(note);
 			}

@@ -36,4 +36,5 @@ dependencies {
     compile 'com.android.support:design:24.2.0'
     compile 'com.sun.mail:android-activation:1.5.6'
     compile 'com.sun.mail:android-mail:1.5.6'
+    compile 'jp.wasabeef:richeditor-android:1.2.0'
 }

@@ -1,5 +1,6 @@
 package io.github.mudassir.notes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,9 @@ import java.util.Properties;
 
 public class ListActivity extends AppCompatActivity implements ClickListener, NoteRequestHandler.NoteRequestReceiver, SwipeRefreshLayout.OnRefreshListener {
 
+	public static final String NOTE_PARCELABLE_EXTRA = "io.github.mudassir.notes.parcelable-note";
+
+	private List<Note> notes;
 	private NoteAdapter adapter;
 	private Properties properties;
 	private SwipeRefreshLayout swipeRefreshLayout;
@@ -51,7 +55,9 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 
 	@Override
 	public void onClick(View view, int position) {
-		android.widget.Toast.makeText(this, position + 1 + "", android.widget.Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, NoteActivity.class);
+		intent.putExtra(NOTE_PARCELABLE_EXTRA, notes.get(position));
+		startActivity(intent);
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 	@Override
 	public void onNotesReceived(List<Note> notes) {
 		swipeRefreshLayout.setRefreshing(false);
+		this.notes = notes;
 		adapter.update(notes);
 	}
 
