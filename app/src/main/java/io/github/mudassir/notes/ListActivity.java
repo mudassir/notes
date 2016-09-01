@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import io.github.mudassir.notes.commons.Constants;
 import io.github.mudassir.notes.structs.Note;
@@ -52,6 +54,20 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
+
+		findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Note note = new Note.Builder()
+						.identifier(UUID.randomUUID().toString())
+						.date(new Date(System.currentTimeMillis()))
+						.title("")
+						.body("")
+						.build();
+				notes.add(note);
+				showNote(note, notes.size() - 1);
+			}
+		});
 	}
 
 	@Override
@@ -71,10 +87,7 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 
 	@Override
 	public void onClick(View view, int position) {
-		Intent intent = new Intent(this, NoteActivity.class);
-		intent.putExtra(Constants.NOTE_INDEX, position);
-		intent.putExtra(Constants.NOTE_PARCELABLE_EXTRA, notes.get(position));
-		startActivityForResult(intent, REQUEST_CODE);
+		showNote(notes.get(position), position);
 	}
 
 	@Override
@@ -103,5 +116,12 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 	@Override
 	public void onRefresh() {
 		new NoteFetchHandler(this).execute(properties);
+	}
+
+	private void showNote(Note note, int index) {
+		Intent intent = new Intent(this, NoteActivity.class);
+		intent.putExtra(Constants.NOTE_INDEX, index);
+		intent.putExtra(Constants.NOTE_PARCELABLE_EXTRA, note);
+		startActivityForResult(intent, REQUEST_CODE);
 	}
 }
