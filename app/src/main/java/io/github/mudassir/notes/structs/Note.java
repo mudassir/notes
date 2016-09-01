@@ -1,8 +1,9 @@
-package io.github.mudassir.notes;
+package io.github.mudassir.notes.structs;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.Spanned;
+
+import java.util.Date;
 
 /**
  * @see <a href="http://www.parcelabler.com">http://www.parcelabler.com</a>
@@ -11,12 +12,18 @@ public class Note implements Parcelable {
 
 	public static final class Builder {
 
-		private String date;
+		private Date date;
+		private String identifier;
 		private String title;
 		private String body;
 
-		public Builder date(String date) {
+		public Builder date(Date date) {
 			this.date = date;
+			return this;
+		}
+
+		public Builder identifier(String identifier) {
+			this.identifier = identifier;
 			return this;
 		}
 
@@ -31,7 +38,7 @@ public class Note implements Parcelable {
 		}
 
 		public Note build() {
-			return new Note(date, title, body);
+			return new Note(date, identifier, title, body);
 		}
 	}
 
@@ -47,25 +54,29 @@ public class Note implements Parcelable {
 		}
 	};
 
-	private String date;
+	private Date date;
+	private String identifier;
 	private String title;
 	private String body;
 
-	private Note(String date, String title, String body) {
+	private Note(Date date, String identifier, String title, String body) {
 		this.date = date;
+		this.identifier = identifier;
 		this.title = title;
 		this.body = body;
 	}
 
 	private Note(Parcel in) {
-		date = in.readString();
+		date = new Date(in.readLong());
+		identifier = in.readString();
 		title = in.readString();
 		body = in.readString();
 	}
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(date);
+		dest.writeLong(date.getTime());
+		dest.writeString(identifier);
 		dest.writeString(title);
 		dest.writeString(body);
 	}
@@ -75,15 +86,35 @@ public class Note implements Parcelable {
 		return 0;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getBody() {
 		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
 	}
 }

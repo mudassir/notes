@@ -20,9 +20,11 @@
         </activity>
 		<activity
 			android:name=".ListActivity"
+			android:launchMode="singleTop"
 			android:theme="@style/AppTheme.NoActionBar"/>
 		<activity
 			android:name=".NoteActivity"
+			android:parentActivityName=".ListActivity"
 			android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

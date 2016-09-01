@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.github.mudassir.notes.structs.Note;
+
 /**
  * Basic implementation of RecyclerView adapter for {@link Note}.
  */

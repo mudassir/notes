@@ -1,7 +1,6 @@
-package io.github.mudassir.notes;
+package io.github.mudassir.notes.tasks;
 
 import android.os.AsyncTask;
-import android.text.Html;
 import android.util.Log;
 
 import java.io.IOException;
@@ -16,27 +15,25 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import io.github.mudassir.notes.commons.Constants;
+import io.github.mudassir.notes.structs.Note;
+
 /**
  * AsyncTask to fetch the notes using the specified properties.
  */
-public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> {
+public class NoteFetchHandler extends AsyncTask<Properties, Void, List<Note>> {
 
-	public static final String PACKAGE = "io.github.mudassir.notes";
-	public static final String TAG = "NoteRequestHandler";
+	public static final String TAG = "NoteFetchHandler";
 
-	public static final String PROPERTY_HOST = PACKAGE + ".host";
-	public static final String PROPERTY_USER = PACKAGE + ".user";
-	public static final String PROPERTY_PASSWORD = PACKAGE + ".password";
-
-	public interface NoteRequestReceiver {
-		void onNotesReceived(List<Note> notes);
+	public interface NoteFetchListener {
+		void onNotesFetched(List<Note> notes);
 		void onNotesCancelled(Exception e);
 	}
 
-	private final NoteRequestReceiver receiver;
+	private final NoteFetchListener listener;
 
-	public NoteRequestHandler(NoteRequestReceiver receiver) {
-		this.receiver = receiver;
+	public NoteFetchHandler(NoteFetchListener listener) {
+		this.listener = listener;
 	}
 
 	@Override
@@ -46,9 +43,9 @@ public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> 
 		try {
 			Properties properties = args[0];
 
-			String host = (String) properties.remove(PROPERTY_HOST);
-			String user = (String) properties.remove(PROPERTY_USER);
-			String password = (String) properties.remove(PROPERTY_PASSWORD);
+			String host = properties.getProperty(Constants.PROPERTY_HOST);
+			String user = properties.getProperty(Constants.PROPERTY_USER);
+			String password = properties.getProperty(Constants.PROPERTY_PASSWORD);
 
 			// Create the POP3 store object and connect with the pop server
 			Session emailSession = Session.getInstance(properties);
@@ -62,22 +59,25 @@ public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> 
 			Message[] messages = emailFolder.getMessages();
 			for (Message message : messages) {
 				Note note = new Note.Builder()
+						.date(message.getSentDate())
+						.identifier(message.getHeader(Constants.HEADER_UNIQUE_IDENTIFIER)[0])
 						.title(message.getSubject())
 						.body(message.getContent().toString())
 						.build();
+
 				notes.add(note);
 			}
 
 			emailFolder.close(false);
 			store.close();
 		} catch (NullPointerException e) {
-			receiver.onNotesCancelled(e);
+			Log.e(TAG, "Unexpected null pointer", e);
 		} catch (NoSuchProviderException e) {
-			receiver.onNotesCancelled(e);
+			Log.e(TAG, "Error with email", e);
 		} catch (MessagingException e) {
-			receiver.onNotesCancelled(e);
+			Log.e(TAG, "Error while dealing with messages", e);
 		} catch (IOException e) {
-			receiver.onNotesCancelled(e);
+			Log.e(TAG, "Unexpected I/O error", e);
 		}
 
 		return notes;
@@ -86,12 +86,12 @@ public class NoteRequestHandler extends AsyncTask<Properties, Void, List<Note>> 
 	@Override
 	protected void onPostExecute(List<Note> notes) {
 		super.onPostExecute(notes);
-		receiver.onNotesReceived(notes);
+		listener.onNotesFetched(notes);
 	}
 
 	@Override
 	protected void onCancelled() {
 		super.onCancelled();
-		receiver.onNotesCancelled(new NullPointerException("Note fetch cancelled"));
+		listener.onNotesCancelled(new NullPointerException("Note fetch cancelled"));
 	}
 }
