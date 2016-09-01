@@ -1,0 +1,110 @@
+<android.support.v4.widget.SwipeRefreshLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/swipe_refresh"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="16dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<EditText
+					android:id="@+id/email"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/prompt_email"
+					android:imeOptions="actionNext"
+					android:inputType="textEmailAddress"
+					android:maxLines="1">
+
+					<requestFocus/>
+
+				</EditText>
+
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<EditText
+					android:id="@+id/password"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/prompt_password"
+					android:imeOptions="actionGo"
+					android:inputType="textPassword"
+					android:maxLines="1"/>
+
+			</android.support.design.widget.TextInputLayout>
+
+			<LinearLayout
+				android:id="@+id/config_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:visibility="gone">
+
+				<android.support.design.widget.TextInputLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<EditText
+						android:id="@+id/host"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/prompt_host"
+						android:imeOptions="actionNext"
+						android:inputType="text"
+						android:maxLines="1"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<EditText
+						android:id="@+id/port"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/prompt_port"
+						android:imeOptions="actionNext"
+						android:inputType="number"
+						android:maxLines="1"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.v7.widget.SwitchCompat
+					android:id="@+id/starttls"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:checked="true"
+					android:text="@string/prompt_starttls"/>
+
+			</LinearLayout>
+
+			<Button
+				android:id="@+id/email_sign_in_button"
+				style="?android:textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:text="@string/action_sign_in"
+				android:textStyle="bold"/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

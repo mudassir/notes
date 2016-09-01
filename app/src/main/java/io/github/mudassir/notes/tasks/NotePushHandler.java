@@ -100,9 +100,9 @@ public class NotePushHandler extends AsyncTask<Void, Void, Void> {
 			store.close();
 			listener.onNotePushed();
 		} catch (NoSuchProviderException e) {
-			Log.e(TAG, "Error with email", e);
+			Log.e(TAG, "Incorrect provider", e);
 		} catch (MessagingException e) {
-			Log.e(TAG, "Error while dealing with messages", e);
+			Log.e(TAG, "Could not connect to server", e);
 		}
 
 		return null;

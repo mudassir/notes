@@ -73,11 +73,11 @@ public class NoteFetchHandler extends AsyncTask<Properties, Void, List<Note>> {
 		} catch (NullPointerException e) {
 			Log.e(TAG, "Unexpected null pointer", e);
 		} catch (NoSuchProviderException e) {
-			Log.e(TAG, "Error with email", e);
+			Log.e(TAG, "Incorrect provider", e);
 		} catch (MessagingException e) {
-			Log.e(TAG, "Error while dealing with messages", e);
+			Log.e(TAG, "Server connection error", e);
 		} catch (IOException e) {
-			Log.e(TAG, "Unexpected I/O error", e);
+			Log.e(TAG, "Invalid message content", e);
 		}
 
 		return notes;

@@ -20,12 +20,17 @@
         </activity>
 		<activity
 			android:name=".ListActivity"
+			android:label="@string/app_name"
 			android:launchMode="singleTop"
 			android:theme="@style/AppTheme.NoActionBar"/>
 		<activity
 			android:name=".NoteActivity"
 			android:parentActivityName=".ListActivity"
 			android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/action_sign_in"
+			android:noHistory="true"/>
     </application>
 
 </manifest>
