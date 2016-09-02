@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 
 	public static final int REQUEST_CODE = 786;
 
+	private FirebaseAnalytics analytics;
 	private List<Note> notes;
 	private NoteAdapter adapter;
 	private Properties properties;
@@ -36,6 +39,8 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 
 		setContentView(R.layout.activity_list);
 		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+		analytics = FirebaseAnalytics.getInstance(this);
 
 		Bundle args = getIntent().getExtras();
 		properties = new Properties();
@@ -68,6 +73,11 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 						.body("")
 						.build();
 				notes.add(note);
+
+				Bundle bundle = new Bundle();
+				bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "New note created");
+				analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
 				showNote(note, notes.size() - 1);
 			}
 		});
@@ -90,6 +100,10 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 
 	@Override
 	public void onClick(View view, int position) {
+		Bundle bundle = new Bundle();
+		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Existing note selected");
+		analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
 		showNote(notes.get(position), position);
 	}
 

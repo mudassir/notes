@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "305243289313",
+    "firebase_url": "https://notes-ba3a7.firebaseio.com",
+    "project_id": "notes-ba3a7",
+    "storage_bucket": "notes-ba3a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305243289313:android:883aebc991b96665",
+        "android_client_info": {
+          "package_name": "io.github.mudassir.notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305243289313-co60lao3e4rvbohppuv2d26anttrf0h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhM7XqMNbE6JUtJ4sJUi75FpK28vZAVwg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

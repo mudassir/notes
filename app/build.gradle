@@ -34,7 +34,10 @@ repositories {
 dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
+    compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.sun.mail:android-activation:1.5.6'
     compile 'com.sun.mail:android-mail:1.5.6'
     compile 'jp.wasabeef:richeditor-android:1.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

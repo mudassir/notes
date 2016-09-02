@@ -16,6 +16,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import io.github.mudassir.notes.commons.Constants;
 import io.github.mudassir.notes.tasks.LoginHandler;
 
@@ -37,11 +39,15 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 	private int port;
 	private boolean starttls;
 	private SwipeRefreshLayout refreshLayout;
+	private FirebaseAnalytics analytics;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		analytics = FirebaseAnalytics.getInstance(this);
+		analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
 
 		refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 		refreshLayout.setEnabled(false);
@@ -178,6 +184,10 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 			edit.putBoolean(Constants.EMAIL_IMAP_STARTTLS, starttls);
 			edit.apply();
 
+			Bundle bundle = new Bundle();
+			bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Successful login");
+			analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
 			// Pass properties on to ListActivity for note handling
 			Intent intent = new Intent(this, ListActivity.class);
 			intent.putExtra(Constants.EMAIL_IMAP_USER, user);
@@ -188,6 +198,11 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 			startActivity(intent);
 		} else {
 			// Retry
+
+			Bundle bundle = new Bundle();
+			bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Unsuccessful login");
+			analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
 			emailView.setError(getString(R.string.error_login_failed));
 			passwordView.setError(getString(R.string.error_login_failed));
 			emailView.requestFocus();
@@ -198,6 +213,10 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 	public void onLoginCancelled() {
 		authTask = null;
 		refreshLayout.setRefreshing(false);
+
+		Bundle bundle = new Bundle();
+		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Login error");
+		analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
 	}
 
 	/**
