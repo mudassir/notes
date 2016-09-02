@@ -222,13 +222,6 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View view) {
-				startActivity(new Intent(MainActivity.this, ListActivity.class));
-			}
-		});
-
 		findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

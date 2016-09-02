@@ -178,7 +178,14 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 			edit.putBoolean(Constants.EMAIL_IMAP_STARTTLS, starttls);
 			edit.apply();
 
-			finish();
+			// Pass properties on to ListActivity for note handling
+			Intent intent = new Intent(this, ListActivity.class);
+			intent.putExtra(Constants.EMAIL_IMAP_USER, user);
+			intent.putExtra(Constants.EMAIL_IMAP_PASSWORD, password);
+			intent.putExtra(Constants.EMAIL_IMAP_HOST, host);
+			intent.putExtra(Constants.EMAIL_IMAP_PORT, port);
+			intent.putExtra(Constants.EMAIL_IMAP_STARTTLS, starttls);
+			startActivity(intent);
 		} else {
 			// Retry
 			emailView.setError(getString(R.string.error_login_failed));

@@ -28,12 +28,6 @@
 		android:text="Draft" />
 
 	<Button
-		android:id="@+id/start"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Start"/>
-
-	<Button
 		android:id="@+id/login"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

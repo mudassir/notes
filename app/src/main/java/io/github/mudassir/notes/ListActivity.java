@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -34,16 +35,18 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_list);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
+		Bundle args = getIntent().getExtras();
 		properties = new Properties();
-		properties.put(Constants.EMAIL_IMAP_HOST, getString(R.string.incoming_host));
-		properties.put(Constants.EMAIL_IMAP_PORT, getString(R.string.incoming_port));
-		properties.put(Constants.EMAIL_IMAP_STARTTLS, "true");
-		properties.put(Constants.PROPERTY_HOST, getString(R.string.incoming_host));
-		properties.put(Constants.PROPERTY_USER, getString(R.string.user));
-		properties.put(Constants.PROPERTY_PASSWORD, getString(R.string.password));
+		properties.put(Constants.EMAIL_IMAP_HOST, args.getString(Constants.EMAIL_IMAP_HOST));
+		properties.put(Constants.EMAIL_IMAP_PORT, args.getInt(Constants.EMAIL_IMAP_PORT));
+		properties.put(Constants.EMAIL_IMAP_STARTTLS, args.getBoolean(Constants.EMAIL_IMAP_STARTTLS) + "");
+		properties.put(Constants.PROPERTY_HOST, args.getString(Constants.EMAIL_IMAP_HOST));
+		properties.put(Constants.PROPERTY_USER, args.getString(Constants.EMAIL_IMAP_USER));
+		properties.put(Constants.PROPERTY_PASSWORD, args.getString(Constants.EMAIL_IMAP_PASSWORD));
 
-		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setRefreshing(true);
 		onRefresh();
