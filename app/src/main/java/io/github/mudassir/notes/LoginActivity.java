@@ -111,10 +111,6 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 				findViewById(R.id.config_container).setVisibility(View.VISIBLE);
 				return true;
 
-			case R.id.help:
-				// TODO: 2016-09-01 Show dialog
-				return true;
-
 			default:
 				return super.onOptionsItemSelected(item);
 		}

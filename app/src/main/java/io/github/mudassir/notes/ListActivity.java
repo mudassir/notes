@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -95,6 +97,24 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 			notes.remove(index);
 			notes.add(index, note);
 			adapter.notifyDataSetChanged();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_list, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.dollar:
+				startActivity(new Intent(this, DonateActivity.class));
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 

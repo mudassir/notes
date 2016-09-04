@@ -3,32 +3,39 @@
     package="io.github.mudassir.notes"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+	<uses-permission android:name="com.android.vending.BILLING"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
 		<activity
 			android:name=".ListActivity"
 			android:label="@string/app_name"
 			android:launchMode="singleTop"
 			android:theme="@style/AppTheme.NoActionBar"/>
+
 		<activity
 			android:name=".NoteActivity"
 			android:parentActivityName=".ListActivity"
 			android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".LoginActivity"
-            android:label="@string/action_sign_in"
 			android:noHistory="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-    </application>
+
+        <activity
+			android:name=".DonateActivity"
+			android:parentActivityName=".ListActivity">
+		</activity>
+
+	</application>
 
 </manifest>

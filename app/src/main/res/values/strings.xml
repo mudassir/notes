@@ -15,4 +15,11 @@
 	<!-- Login menu -->
 	<string name="menu_help">Help</string>
 	<string name="menu_settings">Configure email settings</string>
+
+	<!--List menu -->
+	<string name="menu_dollar">Donate</string>
+
+	<!-- DonateActivity -->
+	<string name="donate">Donate</string>
+
 </resources>
