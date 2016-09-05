@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,12 +12,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.mudassir.notes.billing.IabBroadcastReceiver;
-import io.github.mudassir.notes.billing.IabHelper;
-import io.github.mudassir.notes.billing.IabResult;
-import io.github.mudassir.notes.billing.Inventory;
-import io.github.mudassir.notes.billing.Purchase;
-import io.github.mudassir.notes.billing.key.Gen;
+import io.gitlab.mudassir.notes.billing.IabBroadcastReceiver;
+import io.gitlab.mudassir.notes.billing.IabHelper;
+import io.gitlab.mudassir.notes.billing.IabResult;
+import io.gitlab.mudassir.notes.billing.Inventory;
+import io.gitlab.mudassir.notes.billing.Purchase;
+import io.gitlab.mudassir.notes.billing.key.Gen;
 
 public class DonateActivity extends AppCompatActivity
 		implements IabHelper.OnIabPurchaseFinishedListener, IabHelper.OnIabSetupFinishedListener,

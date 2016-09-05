@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import io.github.mudassir.notes.commons.Constants;
-import io.github.mudassir.notes.tasks.LoginHandler;
+import io.gitlab.mudassir.notes.commons.Constants;
+import io.gitlab.mudassir.notes.tasks.LoginHandler;
 
 /**
  *

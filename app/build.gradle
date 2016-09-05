@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "io.github.mudassir.notes"
+        applicationId "io.gitlab.mudassir.notes"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1

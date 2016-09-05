@@ -1,4 +1,4 @@
-package io.github.mudassir.notes.tasks;
+package io.gitlab.mudassir.notes.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;

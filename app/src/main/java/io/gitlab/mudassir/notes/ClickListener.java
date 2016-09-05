@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.view.View;
 

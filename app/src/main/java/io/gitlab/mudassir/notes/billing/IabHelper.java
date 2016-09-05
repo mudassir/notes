@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package io.github.mudassir.notes.billing;
+package io.gitlab.mudassir.notes.billing;
 
 import android.app.Activity;
 import android.app.PendingIntent;

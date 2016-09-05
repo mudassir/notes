@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.mudassir.notes.structs.Note;
+import io.gitlab.mudassir.notes.structs.Note;
 
 /**
  * Basic implementation of RecyclerView adapter for {@link Note}.

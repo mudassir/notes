@@ -1,4 +1,4 @@
-package io.github.mudassir.notes.tasks;
+package io.gitlab.mudassir.notes.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,8 +15,8 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import io.github.mudassir.notes.commons.Constants;
-import io.github.mudassir.notes.structs.Note;
+import io.gitlab.mudassir.notes.commons.Constants;
+import io.gitlab.mudassir.notes.structs.Note;
 
 /**
  * AsyncTask to fetch the notes using the specified properties.

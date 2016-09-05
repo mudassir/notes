@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +19,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import io.github.mudassir.notes.commons.Constants;
-import io.github.mudassir.notes.structs.Note;
-import io.github.mudassir.notes.tasks.NoteFetchHandler;
-import io.github.mudassir.notes.tasks.NotePushHandler;
+import io.gitlab.mudassir.notes.commons.Constants;
+import io.gitlab.mudassir.notes.structs.Note;
+import io.gitlab.mudassir.notes.tasks.NoteFetchHandler;
+import io.gitlab.mudassir.notes.tasks.NotePushHandler;
 
 public class ListActivity extends AppCompatActivity implements ClickListener, NoteFetchHandler.NoteFetchListener, NotePushHandler.NotePushListener, SwipeRefreshLayout.OnRefreshListener {
 

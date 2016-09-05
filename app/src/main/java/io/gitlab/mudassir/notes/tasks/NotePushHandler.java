@@ -1,4 +1,4 @@
-package io.github.mudassir.notes.tasks;
+package io.gitlab.mudassir.notes.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,8 +18,8 @@ import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import io.github.mudassir.notes.commons.Constants;
-import io.github.mudassir.notes.structs.Note;
+import io.gitlab.mudassir.notes.commons.Constants;
+import io.gitlab.mudassir.notes.structs.Note;
 
 /**
  *

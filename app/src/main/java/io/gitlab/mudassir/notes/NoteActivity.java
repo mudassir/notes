@@ -1,4 +1,4 @@
-package io.github.mudassir.notes;
+package io.gitlab.mudassir.notes;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 import java.util.Date;
 
-import io.github.mudassir.notes.commons.Constants;
-import io.github.mudassir.notes.structs.Note;
+import io.gitlab.mudassir.notes.commons.Constants;
+import io.gitlab.mudassir.notes.structs.Note;
 import jp.wasabeef.richeditor.RichEditor;
 
 public class NoteActivity extends AppCompatActivity {

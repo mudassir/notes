@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package io.github.mudassir.notes.billing;
+package io.gitlab.mudassir.notes.billing;
 
 import org.json.JSONException;
 import org.json.JSONObject;

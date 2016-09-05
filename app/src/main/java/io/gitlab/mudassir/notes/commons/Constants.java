@@ -1,4 +1,4 @@
-package io.github.mudassir.notes.commons;
+package io.gitlab.mudassir.notes.commons;
 
 /**
  *

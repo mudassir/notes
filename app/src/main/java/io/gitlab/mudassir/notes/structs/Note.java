@@ -1,4 +1,4 @@
-package io.github.mudassir.notes.structs;
+package io.gitlab.mudassir.notes.structs;
 
 import android.os.Parcel;
 import android.os.Parcelable;

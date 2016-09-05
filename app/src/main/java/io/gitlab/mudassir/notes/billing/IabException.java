@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package io.github.mudassir.notes.billing;
+package io.gitlab.mudassir.notes.billing;
 
 /**
  * Exception thrown when something went wrong with in-app billing.
