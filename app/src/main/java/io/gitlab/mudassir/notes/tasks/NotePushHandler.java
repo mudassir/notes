@@ -65,7 +65,7 @@ public class NotePushHandler extends AsyncTask<Void, Void, Void> {
 			 * Delete old message if it previously existed
 			 */
 			Message[] messages = emailFolder.getMessages();
-			if (index != Constants.INVALID_INDEX && messages.length < index) {
+			if (index != Constants.INVALID_INDEX && index < messages.length) {
 				Message oldMessage = null;
 				if (messages[index].getHeader(Constants.HEADER_UNIQUE_IDENTIFIER)[0].equals(note.getIdentifier())) {
 					oldMessage = messages[index];
