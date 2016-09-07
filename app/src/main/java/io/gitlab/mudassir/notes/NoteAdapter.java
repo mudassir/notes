@@ -17,11 +17,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
 	public static final class ViewHolder extends RecyclerView.ViewHolder {
 
-		private TextView textView;
+		private TextView title;
+		private TextView date;
 
 		public ViewHolder(View itemView, final ClickListener listener) {
 			super(itemView);
-			textView = (TextView) itemView.findViewById(R.id.text);
+			title = (TextView) itemView.findViewById(R.id.title);
+			date = (TextView) itemView.findViewById(R.id.date);
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -30,8 +32,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 			});
 		}
 
-		public TextView getTextView() {
-			return textView;
+		public TextView getTitle() {
+			return title;
+		}
+
+		public TextView getDate() {
+			return date;
 		}
 	}
 
@@ -50,7 +56,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
-		holder.getTextView().setText(notes.get(position).getTitle());
+		holder.getTitle().setText(notes.get(position).getTitle());
+		holder.getDate().setText(notes.get(position).getDate().toString());
 	}
 
 	@Override

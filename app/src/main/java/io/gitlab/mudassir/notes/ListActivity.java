@@ -14,6 +14,7 @@ import android.view.View;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -54,6 +55,7 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 		properties.put(Constants.PROPERTY_PASSWORD, args.getString(Constants.EMAIL_IMAP_PASSWORD));
 
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+		swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setRefreshing(true);
 		onRefresh();
@@ -136,6 +138,9 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 	@Override
 	public void onNotesFetched(List<Note> notes) {
 		swipeRefreshLayout.setRefreshing(false);
+		// The notes are stored from earliest to latest,
+		// which is the opposite of how they should be displayed
+		Collections.reverse(notes);
 		this.notes = notes;
 		adapter.update(notes);
 	}

@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="?attr/selectableItemBackground"
 	android:clickable="true"
+	android:gravity="center_vertical"
 	android:layout_width="match_parent"
-	android:layout_height="?attr/listPreferredItemHeight"
+	android:layout_height="?android:attr/listPreferredItemHeightLarge"
 	android:orientation="horizontal"
-	android:padding="16dp">
+	android:paddingTop="16dp">
 
 	<TextView
-		android:id="@+id/text"
+		android:id="@+id/title"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:textColor="@color/textPrimary"
+		android:textSize="16sp" />
 
-</LinearLayout>
+	<TextView
+		android:id="@+id/date"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/title"
+		android:layout_marginStart="16dp"
+		android:textColor="@color/textSecondary"
+		android:textSize="12sp" />
+
+	<!-- Divider -->
+	<View
+		android:background="#FFE0E0E0"
+		android:layout_alignParentBottom="true"
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp" />
+
+</RelativeLayout>

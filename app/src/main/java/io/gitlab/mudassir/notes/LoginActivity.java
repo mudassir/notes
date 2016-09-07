@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 		analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
 
 		refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+		refreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 		refreshLayout.setEnabled(false);
 
 		settings = getSharedPreferences(Constants.PACKAGE, MODE_PRIVATE);

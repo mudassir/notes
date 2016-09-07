@@ -20,7 +20,7 @@
 		<activity
 			android:name=".NoteActivity"
 			android:parentActivityName=".ListActivity"
-			android:theme="@style/AppTheme.NoActionBar"/>
+			android:theme="@style/AppTheme.Editor"/>
 
         <activity
             android:name=".LoginActivity"

@@ -22,4 +22,7 @@
 	<!-- DonateActivity -->
 	<string name="donate">Donate</string>
 
+	<!-- NoteActivity -->
+	<string name="editor_placeholder">Touch to edit</string>
+
 </resources>

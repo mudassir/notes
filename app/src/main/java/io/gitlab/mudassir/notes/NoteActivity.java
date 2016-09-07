@@ -25,11 +25,11 @@ public class NoteActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_note);
 
-		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+		getSupportActionBar().setTitle("");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		editor = (RichEditor) findViewById(R.id.editor);
-		editor.setPlaceholder("this is the placeholder");
+		editor.setPlaceholder(getString(R.string.editor_placeholder));
 		editor.setPadding(16, 16, 16, 16);
 
 		position = getIntent().getIntExtra(Constants.NOTE_INDEX, Constants.INVALID_INDEX);
