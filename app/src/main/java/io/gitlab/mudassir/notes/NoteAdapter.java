@@ -20,7 +20,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 		private TextView title;
 		private TextView date;
 
-		public ViewHolder(View itemView, final ClickListener listener) {
+		public ViewHolder(View itemView, final Listener listener) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			date = (TextView) itemView.findViewById(R.id.date);
@@ -28,6 +28,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 				@Override
 				public void onClick(View view) {
 					listener.onClick(view, getAdapterPosition());
+				}
+			});
+			itemView.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View view) {
+					listener.onLongClick(view, getAdapterPosition());
+					return true;
 				}
 			});
 		}
@@ -41,10 +48,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 		}
 	}
 
-	private ClickListener listener;
+	public interface Listener {
+		void onClick(View view, int position);
+		void onLongClick(View view, int position);
+	}
+
+	private Listener listener;
 	private List<Note> notes;
 
-	public NoteAdapter(ClickListener listener, List<Note> notes) {
+	public NoteAdapter(Listener listener, List<Note> notes) {
 		this.listener = listener;
 		this.notes = notes;
 	}

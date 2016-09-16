@@ -3,9 +3,6 @@ package io.gitlab.mudassir.notes.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Flags;
@@ -28,17 +25,17 @@ public class NotePushHandler extends AsyncTask<Void, Void, Void> {
 
 	public static final String TAG = "NotePushHandler";
 
-	public interface NotePushListener {
+	public interface Listener {
 		void onNotePushed();
 		void onNotePushCanceled();
 	}
 
 	private int index;
 	private Note note;
-	private NotePushListener listener;
+	private Listener listener;
 	private Properties properties;
 
-	public NotePushHandler(NotePushListener listener, Properties properties, Note note, int index) {
+	public NotePushHandler(Listener listener, Properties properties, Note note, int index) {
 		this.listener = listener;
 		this.properties = properties;
 		this.note = note;

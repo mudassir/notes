@@ -25,14 +25,14 @@ public class NoteFetchHandler extends AsyncTask<Properties, Void, List<Note>> {
 
 	public static final String TAG = "NoteFetchHandler";
 
-	public interface NoteFetchListener {
+	public interface Listener {
 		void onNotesFetched(List<Note> notes);
 		void onNotesCancelled(Exception e);
 	}
 
-	private final NoteFetchListener listener;
+	private final Listener listener;
 
-	public NoteFetchHandler(NoteFetchListener listener) {
+	public NoteFetchHandler(Listener listener) {
 		this.listener = listener;
 	}
 

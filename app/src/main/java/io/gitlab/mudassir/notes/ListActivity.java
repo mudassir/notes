@@ -25,7 +25,7 @@ import io.gitlab.mudassir.notes.structs.Note;
 import io.gitlab.mudassir.notes.tasks.NoteFetchHandler;
 import io.gitlab.mudassir.notes.tasks.NotePushHandler;
 
-public class ListActivity extends AppCompatActivity implements ClickListener, NoteFetchHandler.NoteFetchListener, NotePushHandler.NotePushListener, SwipeRefreshLayout.OnRefreshListener {
+public class ListActivity extends AppCompatActivity implements NoteAdapter.Listener, NoteFetchHandler.Listener, NotePushHandler.Listener, SwipeRefreshLayout.OnRefreshListener {
 
 	public static final int REQUEST_CODE = 786;
 
@@ -127,6 +127,11 @@ public class ListActivity extends AppCompatActivity implements ClickListener, No
 		analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
 		showNote(notes.get(position), position);
+	}
+
+	@Override
+	public void onLongClick(View view, int position) {
+		// TODO
 	}
 
 	@Override
