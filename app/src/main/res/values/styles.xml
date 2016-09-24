@@ -7,7 +7,10 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="actionModeStyle">@style/AppTheme.ActionMode</item>
         <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 
@@ -17,6 +20,11 @@
 
     <style name="AppTheme.Editor" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/grey_800</item>
+    </style>
+
+    <style name="AppTheme.ActionMode">
+        <item name="android:actionModeBackground">@color/grey_500</item>
+        <item name="actionModeBackground">@color/grey_500</item>
     </style>
 
 </resources>

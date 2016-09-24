@@ -19,6 +19,9 @@
 	<!--List menu -->
 	<string name="menu_dollar">Donate</string>
 
+	<!--List menu -->
+	<string name="menu_bin">Delete</string>
+
 	<!-- DonateActivity -->
 	<string name="donate">Donate</string>
 
