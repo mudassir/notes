@@ -1,7 +1,6 @@
 package io.gitlab.mudassir.notes;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,20 +11,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.gitlab.mudassir.notes.billing.IabBroadcastReceiver;
 import io.gitlab.mudassir.notes.billing.IabHelper;
 import io.gitlab.mudassir.notes.billing.IabResult;
 import io.gitlab.mudassir.notes.billing.Inventory;
 import io.gitlab.mudassir.notes.billing.Purchase;
 import io.gitlab.mudassir.notes.billing.key.Gen;
 
-public class DonateActivity extends AppCompatActivity
-		implements IabHelper.OnIabPurchaseFinishedListener, IabHelper.OnIabSetupFinishedListener,
-		IabHelper.QueryInventoryFinishedListener, View.OnClickListener {
+/**
+ * Simple in app donations interface adapted from
+ * <a href="https://developer.android.com/training/in-app-billing/index.html">https://developer.android.com/training/in-app-billing/index.html</a>
+ */
+public class DonateActivity extends AppCompatActivity implements IabHelper.OnIabPurchaseFinishedListener, IabHelper.OnIabSetupFinishedListener, IabHelper.QueryInventoryFinishedListener, View.OnClickListener {
 
 	public static final int REQUEST_CODE = 7860;
 
 	public static final String TAG = "DonateActivity";
+	public static final String ONE_DOLLAR = "io.gitlab.mudassir.donation.one_dollar";
+	public static final String FIVE_DOLLARS = "io.gitlab.mudassir.donation.five_dollars";
 
 	private IabHelper iabHelper;
 	private TextView oneDollar;
@@ -70,9 +72,9 @@ public class DonateActivity extends AppCompatActivity
 	public void onClick(View view) {
 		String sku = "";
 		if (view.getId() == R.id.one_dollar) {
-			sku = "one_dollar";
+			sku = ONE_DOLLAR;
 		} else if (view.getId() == R.id.five_dollars) {
-			sku = "five_dollars";
+			sku = FIVE_DOLLARS;
 		}
 
 		if (!TextUtils.isEmpty(sku)) {
@@ -92,8 +94,8 @@ public class DonateActivity extends AppCompatActivity
 		}
 
 		List<String> sku = new ArrayList<>();
-		sku.add("one_dollar");
-		sku.add("five_dollars");
+		sku.add(ONE_DOLLAR);
+		sku.add(FIVE_DOLLARS);
 
 		try {
 			iabHelper.queryInventoryAsync(true, sku, null,  this);
@@ -105,19 +107,17 @@ public class DonateActivity extends AppCompatActivity
 	@Override
 	public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 		if (result.isFailure()) {
-			// handle error
+			// TODO: 2016-09-24 Handle error
 			return;
 		}
 
 		if (inventory.hasDetails("one_dollar")) {
-			String oneDollarPrice = inventory.getSkuDetails("one_dollar").getPrice();
-			oneDollar.setText(getString(R.string.donate) + " " + oneDollarPrice);
+			oneDollar.setText(getString(R.string.donate) + " " + inventory.getSkuDetails("one_dollar").getPrice());
 			oneDollar.setOnClickListener(this);
 		}
 
 		if (inventory.hasDetails("five_dollars")) {
-			String fiveDollarsPrice = inventory.getSkuDetails("five_dollars").getPrice();
-			fiveDollars.setText(getString(R.string.donate) + " " + fiveDollarsPrice);
+			fiveDollars.setText(getString(R.string.donate) + " " + inventory.getSkuDetails("five_dollars").getPrice());
 			fiveDollars.setOnClickListener(this);
 		}
 
@@ -126,6 +126,7 @@ public class DonateActivity extends AppCompatActivity
 	@Override
 	public void onIabPurchaseFinished(IabResult result, Purchase info) {
 		if (result.isFailure()) {
+			// TODO: 2016-09-24  
 			return;
 		}
 	}
