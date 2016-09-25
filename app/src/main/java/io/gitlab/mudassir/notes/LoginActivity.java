@@ -195,7 +195,6 @@ public class LoginActivity extends AppCompatActivity implements LoginHandler.Lis
 			startActivity(intent);
 		} else {
 			// Retry
-
 			Bundle bundle = new Bundle();
 			bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Unsuccessful login");
 			analytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);

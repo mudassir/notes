@@ -42,7 +42,21 @@ public class NoteDeleteHandler extends AsyncTask<Void, Void, Void> {
 			store.connect(host, user, password);
 			Log.d(TAG, "connected to server");
 
-			Folder emailFolder = store.getFolder("Notes");
+			// Search for notes folder
+			Folder[] folders = store.getDefaultFolder().list("*");
+			Folder emailFolder = null;
+			for (Folder folder : folders) {
+				if (folder.getName().toLowerCase().contains("notes")) {
+					emailFolder = folder;
+				}
+			}
+
+			// Create new folder if existing folder was not found
+			if (emailFolder == null) {
+				emailFolder = store.getDefaultFolder().getFolder("Notes");
+				emailFolder.create(Folder.HOLDS_MESSAGES);
+			}
+
 			emailFolder.open(Folder.READ_WRITE);
 
 			Message[] messages = emailFolder.getMessages();
